@@ -44,7 +44,7 @@ public class QRCodeReaderPlugin implements MethodCallHandler, ActivityResultList
 
     private static final int REQUEST_CODE_SCAN_ACTIVITY = 2777;
     private static final int REQUEST_CODE_CAMERA_PERMISSION = 3777;
-    private static QRCodeReaderPlugin instance;
+    private QRCodeReaderPlugin instance;
 
     private FlutterActivity activity;
     private Result pendingResult;
@@ -56,13 +56,11 @@ public class QRCodeReaderPlugin implements MethodCallHandler, ActivityResultList
     }
 
     public static void registerWith(PluginRegistry.Registrar registrar) {
-        if (instance == null) {
-            final MethodChannel channel = new MethodChannel(registrar.messenger(), CHANNEL);
-            instance = new QRCodeReaderPlugin((FlutterActivity) registrar.activity());
-            registrar.addActivityResultListener(instance);
-            registrar.addRequestPermissionsResultListener(instance);
-            channel.setMethodCallHandler(instance);
-        }
+        final MethodChannel channel = new MethodChannel(registrar.messenger(), CHANNEL);
+        instance = new QRCodeReaderPlugin((FlutterActivity) registrar.activity());
+        registrar.addActivityResultListener(instance);
+        registrar.addRequestPermissionsResultListener(instance);
+        channel.setMethodCallHandler(instance);
     }
 
 
