@@ -37,6 +37,7 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry;
+import io.flutter.plugin.common.PluginRegistry.Registrar;
 import io.flutter.plugin.common.PluginRegistry.ActivityResultListener;
 
 public class QRCodeReaderPlugin implements MethodCallHandler, ActivityResultListener, PluginRegistry.RequestPermissionsResultListener {
@@ -50,7 +51,7 @@ public class QRCodeReaderPlugin implements MethodCallHandler, ActivityResultList
     private Map<String, Object> arguments;
     private boolean executeAfterPermissionGranted;
 
-    public QRCodeReaderPlugin(FlutterActivity activity, Registrar regustrar) {
+    public QRCodeReaderPlugin(FlutterActivity activity, Registrar registrar) {
         this.activity = activity;
         registrar.addActivityResultListener(this);
         registrar.addRequestPermissionsResultListener(this);
