@@ -76,4 +76,11 @@ public class QRScanActivity extends Activity implements QRCodeReaderView.OnQRCod
         super.onPause();
         view.stopCamera();
     }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        view.stopCamera();
+    }
+
 }
