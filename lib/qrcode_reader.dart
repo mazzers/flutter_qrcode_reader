@@ -1,15 +1,15 @@
 // Copyright (c) <2017> <Matheus Villela>
-//
+// 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-//
+// 
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-//
+// 
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -51,8 +51,7 @@ class QRCodeReader {
     return this;
   }
 
-  QRCodeReader setExecuteAfterPermissionGranted(
-      bool executeAfterPermissionGranted) {
+  QRCodeReader setExecuteAfterPermissionGranted(bool executeAfterPermissionGranted) {
     _executeAfterPermissionGranted = executeAfterPermissionGranted;
     return this;
   }
@@ -65,19 +64,6 @@ class QRCodeReader {
       "handlePermissions": _handlePermissions,
       "executeAfterPermissionGranted": _executeAfterPermissionGranted,
     };
-
-    String result;
-
-    try {
-      result = await _channel.invokeMethod('readQRCode', params);
-    } on MissingPluginException catch (e) {
-      result = await _channel.invokeMethod('readQRCode', params);
-    } finally {
-      if (result == null) {
-        result = "err";
-      }
-    }
-
-    return result;
+    return await _channel.invokeMethod('readQRCode', params);
   }
 }
